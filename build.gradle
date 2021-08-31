@@ -2,9 +2,6 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url 'https://releases.payworks.io/artifactory/mpos/'
-        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.1"
