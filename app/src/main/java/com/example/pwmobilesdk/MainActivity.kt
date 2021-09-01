@@ -81,16 +81,15 @@ class MainActivity : AppCompatActivity() {
 /*
             val items = mutableListOf( "1", "2", "3" );
 */
-            builder.setTitle("Dialog Title")
-            builder.setMessage("Dialog Text Dialog Text Dialog Text Dialog Text Dialog Text Dialog Text Dialog Text")
-/*
-                .setItems(
-                    items,
-                    DialogInterface.OnClickListener {
-                        dialog, which ->
-                        Log.d( "payworks", "Klick on Dialog" )
-                    }
-*/
+            builder.setTitle("Fire Transaction?")
+            builder.setMessage("Ready to fire a test transaction ?")
+            builder.setPositiveButton( "Go!") {
+                dialog, which -> Log.d( "payworks", "Positive Button clicked!" )
+            }
+            builder.setNegativeButton( "Not now..") {
+                dialog, which -> Log.d( "payworks", "Negative Button clicked!" )
+            }
+
             builder.create().show()
         }
 
