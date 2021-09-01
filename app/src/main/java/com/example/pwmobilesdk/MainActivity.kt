@@ -85,6 +85,9 @@ class MainActivity : AppCompatActivity() {
             builder.setMessage("Ready to fire a test transaction ?")
             builder.setPositiveButton( "Go!") {
                 dialog, which -> Log.d( "payworks", "Positive Button clicked!" )
+
+                Log.d( "payworks", "Perform Payworks Test Transaction .." )
+                this.transaction()
             }
             builder.setNegativeButton( "Not now..") {
                 dialog, which -> Log.d( "payworks", "Negative Button clicked!" )
@@ -111,8 +114,8 @@ class MainActivity : AppCompatActivity() {
     fun transaction() {
         val transactionProvider = createTransactionProvider(
             this, ProviderMode.TEST,
-            "MERCHANT_IDENTIFIER",
-            "MERCHANT_SECRET_KEY"
+            "cbf4d153-e78a-4937-8ece-6b1ec948a2f9",
+            "ZCMNdotEb3dLkRWabOxUsqe20hDq31ml"
         )
 
         /* For starting transaction in mocked mode use fallowing provider:
