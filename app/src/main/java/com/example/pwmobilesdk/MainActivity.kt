@@ -2,7 +2,6 @@ package com.example.pwmobilesdk
 
 import android.app.AlertDialog
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -26,15 +25,11 @@ import io.mpos.transactions.parameters.TransactionParameters
 import io.mpos.accessories.AccessoryFamily
 import io.mpos.accessories.parameters.AccessoryParameters
 import io.mpos.provider.ProviderMode
-import io.mpos.Mpos.createTransactionProvider
 import io.mpos.transactions.Currency
 import io.mpos.transactions.Transaction
 import java.math.BigDecimal
 import java.util.*
-import android.content.DialogInterface
-
-
-
+import io.mpos.Mpos
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,11 +47,12 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
+/*
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -69,38 +65,16 @@ class MainActivity : AppCompatActivity() {
 
         Log.d( "payworks", "onOptionsItemSelected" )
 
-        if ( item.itemId == R.id.action_settings )
+        if ( item.itemId == R.id.action_test_transaction )
         {
-            Log.d( "payworks", "actionSettings" )
-
-            Toast.makeText( this, "Let's do a test transaction ..", Toast.LENGTH_LONG ).show()
-
-            Log.d( "payworks", "Toast - shown!" )
-
-            val builder = AlertDialog.Builder( this )
-/*
-            val items = mutableListOf( "1", "2", "3" );
-*/
-            builder.setTitle("Fire Transaction?")
-            builder.setMessage("Ready to fire a test transaction ?")
-            builder.setPositiveButton( "Go!") {
-                dialog, which -> Log.d( "payworks", "Positive Button clicked!" )
-
-                Log.d( "payworks", "Perform Payworks Test Transaction .." )
-                this.transaction()
-            }
-            builder.setNegativeButton( "Not now..") {
-                dialog, which -> Log.d( "payworks", "Negative Button clicked!" )
-            }
-
-            builder.create().show()
+            showTestTransactionDialog()
         }
 
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_test_transaction -> true
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -111,20 +85,40 @@ class MainActivity : AppCompatActivity() {
                 || super.onSupportNavigateUp()
     }
 
+    fun showTestTransactionDialog() {
+
+        val builder = AlertDialog.Builder( this )
+
+        builder.setTitle("Fire Transaction?")
+        builder.setMessage("Ready to fire a test transaction ?")
+        builder.setPositiveButton( "Go!") {
+            dialog, which -> Log.d( "payworks", "Positive Button clicked!" )
+            Log.d( "payworks", "Perform Payworks Test Transaction .." )
+            this.transaction()
+        }
+        builder.setNegativeButton( "Not now..") {
+            dialog, which -> Log.d( "payworks", "Negative Button clicked!" )
+        }
+
+        builder.create().show()
+    }
+
     fun transaction() {
+
+/*
         val transactionProvider = createTransactionProvider(
             this, ProviderMode.TEST,
             "cbf4d153-e78a-4937-8ece-6b1ec948a2f9",
             "ZCMNdotEb3dLkRWabOxUsqe20hDq31ml"
         )
-
-        /* For starting transaction in mocked mode use fallowing provider:
-    final TransactionProvider transactionProvider = Mpos.createTransactionProvider(this,
+*/
+        // For starting transaction in mocked mode use fallowing provider:
+        val transactionProvider = Mpos.createTransactionProvider(
+            this,
             ProviderMode.MOCK,
             "merchantIdentifier",
-            "merchantSecretKey");
-    */
-
+            "merchantSecretKey"
+        )
 
         /* When using the Bluetooth Miura, use the following parameters: */
         val accessoryParameters = AccessoryParameters.Builder(AccessoryFamily.MIURA_MPI)
