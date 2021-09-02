@@ -103,6 +103,10 @@ class MainActivity : AppCompatActivity() {
         builder.create().show()
     }
 
+    /**
+        Entire code from Payworks Dev Portal Mobile SDK Android Integration page.
+        @see https://payworks.mpymnt.com/cp_int_pos_custom_overview/cp_int_pos_custom_integration.html
+    */
     fun transaction() {
 
 /*
