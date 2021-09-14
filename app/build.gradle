@@ -50,14 +50,14 @@ dependencies {
 
     // payworks mpos mobile sdk
 
-    implementation 'io.payworks:mpos.android.core:2.58.0'
+    implementation 'io.payworks:mpos.android.core:2.57.0'
     // Add these three dependencies if you want to use a Miura card reader
-    implementation 'io.payworks:mpos.java.accessories.miura:2.58.0'
-    implementation 'io.payworks:mpos.android.comlinks.bluetooth:2.58.0:@aar'
-    implementation 'io.payworks:mpos.java.comlinks.tcp:2.58.0'
+    implementation 'io.payworks:mpos.java.accessories.miura:2.57.0'
+    implementation 'io.payworks:mpos.android.comlinks.bluetooth:2.57.0:@aar'
+    implementation 'io.payworks:mpos.java.comlinks.tcp:2.57.0'
     // Add these two dependencies if you want to use a Verifone card reader
-    implementation 'io.payworks:mpos.java.accessories.vipa:2.58.0'
-    implementation 'io.payworks:mpos.java.comlinks.tcp:2.58.0'
+    implementation 'io.payworks:mpos.java.accessories.vipa:2.57.0'
+    implementation 'io.payworks:mpos.java.comlinks.tcp:2.57.0'
 
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
