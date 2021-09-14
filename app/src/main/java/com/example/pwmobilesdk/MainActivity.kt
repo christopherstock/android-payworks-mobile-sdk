@@ -120,8 +120,8 @@ class MainActivity : AppCompatActivity() {
         val transactionProvider = Mpos.createTransactionProvider(
             this,
             ProviderMode.MOCK,
-            "merchantIdentifier",
-            "merchantSecretKey"
+            "cbf4d153-e78a-4937-8ece-6b1ec948a2f9",
+            "ZCMNdotEb3dLkRWabOxUsqe20hDq31ml"
         )
 
         /* When using the Bluetooth Miura, use the following parameters: */
