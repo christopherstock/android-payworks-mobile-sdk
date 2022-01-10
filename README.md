@@ -4,7 +4,7 @@ This Android App is a test implementation of the [Payworks Mobile Payment SDK fo
 # Notes
 Please note these items when working with the **Mobile Payment SDK** for Android:
 
-The Payworks URL with the Maven-Repository needs to be specified inside `settings.gradle`, not inside `build.gradle` as described in the Payworks manual.
+- The Payworks URL with the Maven-Repository needs to be specified inside `settings.gradle`, not inside `build.gradle` as described in the Payworks manual.
 ```
 dependencyResolutionManagement {
   ..
@@ -15,6 +15,7 @@ dependencyResolutionManagement {
 ..
 ```
 
-Downgrade the Dependency for the Payworks Mobile SDK from `2.58` to `2.57`.
+- Downgrade the Dependency for the Payworks Mobile SDK from `2.58` to `2.57`.
 This fixes the `Kotlin runtime error in transaction()` issue.
-Fix the Version of the **Kotlin Gradle Plugin** if a Kotlin transpilation problem occurs. (working with 1.5.30)
+
+- Fix the Version of the **Kotlin Gradle Plugin** if a Kotlin transpilation problem occurs. (working with 1.5.30)
