@@ -20,6 +20,10 @@ import io.mpos.paymentdetails.ApplicationInformation
 import io.mpos.android.shared.BitmapHelper
 import android.graphics.Bitmap
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import io.mpos.transactionprovider.TransactionProcessWithRegistrationListener
 import io.mpos.transactions.parameters.TransactionParameters
 import io.mpos.accessories.AccessoryFamily
@@ -35,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private var _process: TransactionProcess? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -160,7 +165,22 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     Log.d("mpos", "status changed: " + Arrays.toString(processDetails.information))
 
-                    // process.continueCreditDebitSelectionWithCredit()
+                    this@MainActivity._process = process
+
+                    val button :Button = this@MainActivity.findViewById<Button>( R.id.button_test_abort )
+                    var prefix :String = ""
+
+                    if (transaction != null && transaction.canBeAborted())
+                    {
+                        button.isEnabled = false
+                        prefix = "DISABLED - "
+                    }
+                    else {
+                        button.isEnabled = true
+                        prefix = ""
+                    }
+
+                    button.text = prefix + Arrays.toString(processDetails.information)
                 }
 
                 override fun onCustomerSignatureRequired(
@@ -236,5 +256,12 @@ class MainActivity : AppCompatActivity() {
             "The back button is disabled during a transaction. Please use the 'abort' button to cancel the transaction.",
             Toast.LENGTH_LONG
         ).show()
+    }
+
+    fun cancelTransaction() {
+
+        Log.i( "mpos", "cancelTransaction Button pressed!" )
+
+        this._process?.requestAbort()
     }
 }

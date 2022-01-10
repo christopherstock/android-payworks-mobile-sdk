@@ -26,4 +26,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_first" />
 
+    <Button
+        android:id="@+id/button_test_abort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ABORT TRANSACTION"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_test_transaction"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:backgroundTintMode="screen"
+        android:background="@android:color/holo_red_dark"
+        android:enabled="false"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,16 +25,19 @@ class FirstFragment : Fragment() {
     ): View? {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        return binding.root
 
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonTestTransaction.setOnClickListener {
-            // findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             ( activity as MainActivity ).showTestTransactionDialog()
+        }
+
+        binding.buttonTestAbort.setOnClickListener {
+            ( activity as MainActivity ).cancelTransaction()
         }
     }
 

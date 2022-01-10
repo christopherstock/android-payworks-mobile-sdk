@@ -1,3 +1,8 @@
+TODO add text output field for status
+
+
+
+
 # Payworks Mobile Payment SDK for Android
 This Android App is a test implementation of the [Payworks Mobile Payment SDK for Android](https://payworks.mpymnt.com/cp_int_pos_custom_overview/cp_int_pos_custom_installation.html)
 
