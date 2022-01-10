@@ -125,8 +125,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         /* When using the Bluetooth Miura, use the following parameters: */
-        val accessoryParameters = AccessoryParameters.Builder(AccessoryFamily.MIURA_MPI)
-            .bluetooth()
+        val accessoryParameters = AccessoryParameters.Builder(AccessoryFamily.MOCK)
+            .mocked()
             .build()
 
 
@@ -159,6 +159,8 @@ class MainActivity : AppCompatActivity() {
                     processDetails: TransactionProcessDetails
                 ) {
                     Log.d("mpos", "status changed: " + Arrays.toString(processDetails.information))
+
+                    // process.continueCreditDebitSelectionWithCredit()
                 }
 
                 override fun onCustomerSignatureRequired(
