@@ -1,6 +1,5 @@
 package com.example.pwmobilesdk
 
-import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -23,8 +22,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import io.mpos.transactionprovider.TransactionProcessWithRegistrationListener
 import io.mpos.transactions.parameters.TransactionParameters
 import io.mpos.accessories.AccessoryFamily
@@ -42,9 +39,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var _process: TransactionProcess? = null
 
-    private var _logTextView: TextView? = null
-    private var _transactionButton: Button? = null
-    private var _cancelButton: Button? = null
+    private var _textViewLog: TextView? = null
+    private var _buttonStartTransaction: Button? = null
+    private var _buttonAbortTransaction: Button? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,9 +61,9 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 */
-        this._logTextView       = findViewById( R.id.textview_log )
-        this._transactionButton = findViewById( R.id.button_test_transaction )
-        this._cancelButton      = findViewById( R.id.button_test_abort )
+        this._textViewLog       = findViewById( R.id.textview_log )
+        this._buttonStartTransaction = findViewById( R.id.button_test_transaction )
+        this._buttonAbortTransaction      = findViewById( R.id.button_test_abort )
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -102,9 +99,13 @@ class MainActivity : AppCompatActivity() {
         Entire code from Payworks Dev Portal Mobile SDK Android Integration page.
         @see https://payworks.mpymnt.com/cp_int_pos_custom_overview/cp_int_pos_custom_integration.html
     */
-    fun transaction() {
+    fun startTransaction() {
 
-        _logTextView?.append("Starting new Transaction\n\n")
+        _textViewLog?.append("Starting new Transaction\n\n")
+
+        _buttonAbortTransaction?.visibility = View.VISIBLE
+        _buttonAbortTransaction?.isEnabled = false
+
 /*
         val transactionProvider = createTransactionProvider(
             this, ProviderMode.TEST,
@@ -154,21 +155,25 @@ class MainActivity : AppCompatActivity() {
                     transaction: Transaction?,
                     processDetails: TransactionProcessDetails
                 ) {
-                    val lineToLog = Arrays.toString(processDetails.information)
+                    var lineToLog = Arrays.toString(processDetails.information)
 
                     Log.d("mpos", "status changed: " + lineToLog)
 
-                    this@MainActivity._process = process
+                    _process = process
 
-                    if (transaction != null && transaction.canBeAborted())
-                    {
-                        this@MainActivity._cancelButton?.isEnabled = false
-                    }
-                    else {
-                        this@MainActivity._cancelButton?.isEnabled = true
+                    if (transaction != null) {
+                        if (transaction.canBeAborted())
+                        {
+                            _buttonAbortTransaction?.isEnabled = true
+                             lineToLog += ", abortable: " + transaction.canBeAborted()
+                        }
+                        else {
+                            _buttonAbortTransaction?.isEnabled = false
+                            lineToLog += ", abortable: " + transaction.canBeAborted()
+                        }
                     }
 
-                    _logTextView?.append(lineToLog + "\n")
+                    _textViewLog?.append(lineToLog + "\n")
                 }
 
                 override fun onCustomerSignatureRequired(
@@ -215,6 +220,9 @@ class MainActivity : AppCompatActivity() {
                     processDetails: TransactionProcessDetails
                 ) {
                     Log.d("mpos", "completed")
+
+                    _buttonAbortTransaction?.visibility = View.GONE
+
                     if (processDetails.state == TransactionProcessDetailsState.APPROVED) {
                         // print the merchant receipt
                         val merchantReceipt: Receipt = transaction.getMerchantReceipt()
@@ -246,7 +254,7 @@ class MainActivity : AppCompatActivity() {
         ).show()
     }
 
-    fun cancelTransaction() {
+    fun abortTransaction() {
 
         Log.i( "mpos", "cancelTransaction Button pressed!" )
 

@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.example.pwmobilesdk.databinding.FragmentFirstBinding
 
 /**
@@ -33,11 +32,11 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonTestTransaction.setOnClickListener {
-            ( activity as MainActivity ).transaction()
+            ( activity as MainActivity ).startTransaction()
         }
 
         binding.buttonTestAbort.setOnClickListener {
-            ( activity as MainActivity ).cancelTransaction()
+            ( activity as MainActivity ).abortTransaction()
         }
     }
 
