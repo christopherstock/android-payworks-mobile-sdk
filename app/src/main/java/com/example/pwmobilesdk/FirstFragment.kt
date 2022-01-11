@@ -33,7 +33,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonTestTransaction.setOnClickListener {
-            ( activity as MainActivity ).showTestTransactionDialog()
+            ( activity as MainActivity ).transaction()
         }
 
         binding.buttonTestAbort.setOnClickListener {

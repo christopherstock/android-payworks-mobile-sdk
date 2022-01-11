@@ -71,10 +71,9 @@ class MainActivity : AppCompatActivity() {
 
         Log.d( "payworks", "onOptionsItemSelected" )
 
-        if ( item.itemId == R.id.action_test_transaction )
-        {
-            showTestTransactionDialog()
-        }
+        // if ( item.itemId == R.id.action_test_transaction )
+        // {
+        // }
 
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -91,30 +90,11 @@ class MainActivity : AppCompatActivity() {
                 || super.onSupportNavigateUp()
     }
 
-    fun showTestTransactionDialog() {
-
-        val builder = AlertDialog.Builder( this )
-
-        builder.setTitle("Fire Transaction?")
-        builder.setMessage("Ready to fire a test transaction ?")
-        builder.setPositiveButton( "Go!") {
-            dialog, which -> Log.d( "payworks", "Positive Button clicked!" )
-            Log.d( "payworks", "Perform Payworks Test Transaction .." )
-            this.transaction()
-        }
-        builder.setNegativeButton( "Not now..") {
-            dialog, which -> Log.d( "payworks", "Negative Button clicked!" )
-        }
-
-        builder.create().show()
-    }
-
     /**
         Entire code from Payworks Dev Portal Mobile SDK Android Integration page.
         @see https://payworks.mpymnt.com/cp_int_pos_custom_overview/cp_int_pos_custom_integration.html
     */
     fun transaction() {
-
 /*
         val transactionProvider = createTransactionProvider(
             this, ProviderMode.TEST,
