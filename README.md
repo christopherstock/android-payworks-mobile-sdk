@@ -1,4 +1,3 @@
-TODO add scroling pane for TextView
 TODO add input fields for amount, drop-down currency
 TODO Disable "Start Transaction" button while a transaction is running
 TODO unify start and cancel transaction to one single button

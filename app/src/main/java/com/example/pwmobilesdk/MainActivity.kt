@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
     */
     fun startTransaction() {
 
-        _textViewLog?.append("Starting new Transaction\n\n")
+        _textViewLog?.append("Starting new Transaction\n")
 
         _buttonAbortTransaction?.visibility = View.VISIBLE
         _buttonAbortTransaction?.isEnabled = false
@@ -222,6 +222,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d("mpos", "completed")
 
                     _buttonAbortTransaction?.visibility = View.GONE
+                    _textViewLog?.append("Transaction completed\n\n")
 
                     if (processDetails.state == TransactionProcessDetailsState.APPROVED) {
                         // print the merchant receipt

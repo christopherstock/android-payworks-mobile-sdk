@@ -6,15 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
 
-    <TextView
-        android:id="@+id/textview_log"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:id="@+id/textview_log_scroll_view"
+        android:layout_width="fill_parent"
         android:layout_height="300dip"
-        android:text=""
-        android:textColor="#79dc92"
+        android:scrollbars="vertical"
+        android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@android:color/black"
-        />
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/textview_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#000000"
+            android:background="#d8d8d8"
+            android:scrollbars = "vertical"
+            android:scrollbarThumbVertical="@drawable/scrollbar"
+            />
+
+    </ScrollView>
 
     <Button
         android:id="@+id/button_test_transaction"
@@ -23,7 +35,7 @@
         android:text="@string/test_transaction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_log" />
+        app:layout_constraintTop_toBottomOf="@id/textview_log_scroll_view" />
 
     <Button
         android:id="@+id/button_test_abort"
