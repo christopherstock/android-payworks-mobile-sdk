@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         _textViewLog?.append("Starting new Transaction\n")
 
         // disable button 'start transaction'
-        _buttonStartTransaction?.isEnabled  = false
+        _buttonStartTransaction?.visibility = View.GONE
 
         // show but disable button 'cancel transaction'
         _buttonAbortTransaction?.visibility = View.VISIBLE
@@ -213,7 +213,7 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     Log.d("mpos", "completed")
 
-                    _buttonStartTransaction?.isEnabled  = true
+                    _buttonStartTransaction?.visibility = View.VISIBLE
                     _buttonAbortTransaction?.visibility = View.GONE
                     _textViewLog?.append("Transaction completed\n\n")
 

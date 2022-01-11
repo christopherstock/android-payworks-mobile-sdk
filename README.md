@@ -40,5 +40,7 @@ Higher versions yield a Kotlin runtime error in transaction() issue. (`NoSuchMet
 ```
 
 # Backlog
+- TODO unify styles for buttons / different colors
+- TODO scroll log output on appending logs
 - TODO add input fields for amount, drop-down currency
 - TODO unify start and cancel transaction to one single button

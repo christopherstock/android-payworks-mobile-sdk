@@ -23,7 +23,6 @@
             android:textColor="#000000"
             android:background="#d8d8d8"
             android:scrollbars = "vertical"
-            android:scrollbarThumbVertical="@drawable/scrollbar"
             />
 
     </ScrollView>
@@ -35,7 +34,10 @@
         android:text="@string/test_transaction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_log_scroll_view" />
+        app:layout_constraintTop_toBottomOf="@id/textview_log_scroll_view"
+        android:background="@drawable/ic_launcher_background"
+        android:backgroundTint="@android:color/holo_red_dark"
+        />
 
     <Button
         android:id="@+id/button_test_abort"
@@ -45,10 +47,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_test_transaction"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:backgroundTintMode="screen"
-        android:background="@android:color/holo_red_dark"
         android:visibility="gone"
+        android:background="@drawable/ic_launcher_background"
+        android:backgroundTint="@android:color/holo_red_dark"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
