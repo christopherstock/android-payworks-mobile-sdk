@@ -23,6 +23,21 @@ dependencyResolutionManagement {
 - Downgrade the Dependency for the Payworks Mobile SDK to `2.57`.
 Higher versions yield a Kotlin runtime error in transaction() issue. (`NoSuchMethodException`)
 - Fix the Version of the **Kotlin Gradle Plugin** if a Kotlin transpilation problem occurs. (working with 1.5.30)
+- MOCKED-Mode must be set in the TransactionProvider **and** in the Accessory
+```
+    // For starting transaction in mocked mode use fallowing provider:
+    val transactionProvider = Mpos.createTransactionProvider(
+        this,
+        ProviderMode.MOCK,
+        "cbf4d153-e78a-4937-8ece-6b1ec948a2f9",
+        "ZCMNdotEb3dLkRWabOxUsqe20hDq31ml"
+    )
+  
+    /* When using the Bluetooth Miura, use the following parameters: */
+    val accessoryParameters = AccessoryParameters.Builder(AccessoryFamily.MOCK)
+        .mocked()
+        .build()
+```
 
 # Backlog
 - TODO add input fields for amount, drop-down currency
