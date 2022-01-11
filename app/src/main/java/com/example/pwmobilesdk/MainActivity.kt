@@ -54,15 +54,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-/*
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-*/
-        this._textViewLog       = findViewById( R.id.textview_log )
+
+        this._textViewLog            = findViewById( R.id.textview_log )
         this._buttonStartTransaction = findViewById( R.id.button_test_transaction )
-        this._buttonAbortTransaction      = findViewById( R.id.button_test_abort )
+        this._buttonAbortTransaction = findViewById( R.id.button_test_abort )
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -100,18 +95,16 @@ class MainActivity : AppCompatActivity() {
     */
     fun startTransaction() {
 
+        // log new transaction start
         _textViewLog?.append("Starting new Transaction\n")
 
-        _buttonAbortTransaction?.visibility = View.VISIBLE
-        _buttonAbortTransaction?.isEnabled = false
+        // disable button 'start transaction'
+        _buttonStartTransaction?.isEnabled  = false
 
-/*
-        val transactionProvider = createTransactionProvider(
-            this, ProviderMode.TEST,
-            "cbf4d153-e78a-4937-8ece-6b1ec948a2f9",
-            "ZCMNdotEb3dLkRWabOxUsqe20hDq31ml"
-        )
-*/
+        // show but disable button 'cancel transaction'
+        _buttonAbortTransaction?.visibility = View.VISIBLE
+        _buttonAbortTransaction?.isEnabled  = false
+
         // For starting transaction in mocked mode use fallowing provider:
         val transactionProvider = Mpos.createTransactionProvider(
             this,
@@ -220,6 +213,7 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     Log.d("mpos", "completed")
 
+                    _buttonStartTransaction?.isEnabled  = true
                     _buttonAbortTransaction?.visibility = View.GONE
                     _textViewLog?.append("Transaction completed\n\n")
 

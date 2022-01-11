@@ -41,5 +41,4 @@ Higher versions yield a Kotlin runtime error in transaction() issue. (`NoSuchMet
 
 # Backlog
 - TODO add input fields for amount, drop-down currency
-- TODO Disable "Start Transaction" button while a transaction is running
 - TODO unify start and cancel transaction to one single button
