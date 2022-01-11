@@ -1,7 +1,7 @@
-TODO add text output field for status
-
-
-
+TODO add scroling pane for TextView
+TODO add input fields for amount, drop-down currency
+TODO Disable "Start Transaction" button while a transaction is running
+TODO unify start and cancel transaction to one single button
 
 # Payworks Mobile Payment SDK for Android
 This Android App is a test implementation of the [Payworks Mobile Payment SDK for Android](https://payworks.mpymnt.com/cp_int_pos_custom_overview/cp_int_pos_custom_installation.html)
