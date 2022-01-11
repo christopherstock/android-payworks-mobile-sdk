@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
     private var _buttonStartTransaction: Button? = null
     private var _buttonAbortTransaction: Button? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
