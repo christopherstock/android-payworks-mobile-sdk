@@ -42,6 +42,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var _process: TransactionProcess? = null
 
+    private var _logTextView: TextView? = null
+    private var _transactionButton: Button? = null
+    private var _cancelButton: Button? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,6 +64,9 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 */
+        this._logTextView       = findViewById( R.id.textview_log )
+        this._transactionButton = findViewById( R.id.button_test_transaction )
+        this._cancelButton      = findViewById( R.id.button_test_abort )
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -95,6 +103,8 @@ class MainActivity : AppCompatActivity() {
         @see https://payworks.mpymnt.com/cp_int_pos_custom_overview/cp_int_pos_custom_integration.html
     */
     fun transaction() {
+
+        _logTextView?.append("Starting new Transaction\n\n")
 /*
         val transactionProvider = createTransactionProvider(
             this, ProviderMode.TEST,
@@ -150,23 +160,15 @@ class MainActivity : AppCompatActivity() {
 
                     this@MainActivity._process = process
 
-                    val button      :Button   = this@MainActivity.findViewById<Button>( R.id.button_test_abort )
-                    val logTextView :TextView = this@MainActivity.findViewById<Button>( R.id.textview_log )
-                    var prefix      :String   = ""
-
                     if (transaction != null && transaction.canBeAborted())
                     {
-                        button.isEnabled = false
-                        prefix = "DISABLED - "
+                        this@MainActivity._cancelButton?.isEnabled = false
                     }
                     else {
-                        button.isEnabled = true
-                        prefix = ""
+                        this@MainActivity._cancelButton?.isEnabled = true
                     }
 
-                    button.text = prefix + lineToLog
-
-                    logTextView.append(lineToLog + "\n")
+                    _logTextView?.append(lineToLog + "\n")
                 }
 
                 override fun onCustomerSignatureRequired(
