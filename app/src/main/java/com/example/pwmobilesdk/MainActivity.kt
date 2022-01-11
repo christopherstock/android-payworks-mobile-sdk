@@ -22,6 +22,7 @@ import android.graphics.Bitmap
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import io.mpos.transactionprovider.TransactionProcessWithRegistrationListener
@@ -163,12 +164,15 @@ class MainActivity : AppCompatActivity() {
                     transaction: Transaction?,
                     processDetails: TransactionProcessDetails
                 ) {
-                    Log.d("mpos", "status changed: " + Arrays.toString(processDetails.information))
+                    val lineToLog = Arrays.toString(processDetails.information)
+
+                    Log.d("mpos", "status changed: " + lineToLog)
 
                     this@MainActivity._process = process
 
-                    val button :Button = this@MainActivity.findViewById<Button>( R.id.button_test_abort )
-                    var prefix :String = ""
+                    val button      :Button   = this@MainActivity.findViewById<Button>( R.id.button_test_abort )
+                    val logTextView :TextView = this@MainActivity.findViewById<Button>( R.id.textview_log )
+                    var prefix      :String   = ""
 
                     if (transaction != null && transaction.canBeAborted())
                     {
@@ -180,7 +184,9 @@ class MainActivity : AppCompatActivity() {
                         prefix = ""
                     }
 
-                    button.text = prefix + Arrays.toString(processDetails.information)
+                    button.text = prefix + lineToLog
+
+                    logTextView.append(lineToLog + "\n")
                 }
 
                 override fun onCustomerSignatureRequired(
