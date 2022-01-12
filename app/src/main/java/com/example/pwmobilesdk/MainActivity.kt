@@ -9,7 +9,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.example.pwmobilesdk.databinding.ActivityMainBinding
-import android.widget.Toast
 import io.mpos.transactions.receipts.Receipt
 import io.mpos.transactionprovider.TransactionProcessDetailsState
 import io.mpos.transactionprovider.TransactionProcessDetails
@@ -22,9 +21,7 @@ import android.icu.util.CurrencyAmount
 import android.text.Editable
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import io.mpos.transactionprovider.TransactionProcessWithRegistrationListener
 import io.mpos.transactions.parameters.TransactionParameters
 import io.mpos.accessories.AccessoryFamily
@@ -46,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     private var _buttonStartTransaction: Button? = null
     private var _buttonAbortTransaction: Button? = null
     private var _inputAmount: EditText? = null
+    private var _inputCurrency: Spinner? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +61,11 @@ class MainActivity : AppCompatActivity() {
         this._buttonStartTransaction = findViewById( R.id.button_test_transaction )
         this._buttonAbortTransaction = findViewById( R.id.button_test_abort )
         this._inputAmount = findViewById(R.id.input_amount )
+        this._inputCurrency = findViewById(R.id.input_currency)
+
+        //setup currency spinner
+        this._inputCurrency?.adapter = ArrayAdapter<Currency>(this, android.R.layout.simple_list_item_1, Currency.values())
+        this._inputCurrency?.setSelection(Currency.EUR.ordinal)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -109,6 +112,8 @@ class MainActivity : AppCompatActivity() {
         }
         decimalAmount = amount.toBigDecimal()
 
+        val currency = _inputCurrency?.selectedItem as Currency
+
         // log new transaction start
         _textViewLog?.append("Starting new Transaction\n")
 
@@ -138,8 +143,9 @@ class MainActivity : AppCompatActivity() {
                                                                      .tcp("192.168.254.123", 16107)
                                                                      .build();
     */
+
         val transactionParameters = TransactionParameters.Builder()
-            .charge(decimalAmount, Currency.EUR)
+            .charge(decimalAmount, currency)
             .subject("Bouquet of Flowers")
             .customIdentifier("yourReferenceForTheTransaction")
             .build()
