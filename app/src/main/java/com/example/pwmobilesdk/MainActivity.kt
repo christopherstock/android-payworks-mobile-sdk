@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     private var _textViewLog: TextView? = null
     private var _buttonStartTransaction: Button? = null
     private var _buttonAbortTransaction: Button? = null
+    private var _buttonClearLog: Button? = null
     private var _inputAmount: EditText? = null
     private var _inputCurrency: Spinner? = null
 
@@ -60,8 +61,9 @@ class MainActivity : AppCompatActivity() {
         this._textViewLog            = findViewById( R.id.textview_log )
         this._buttonStartTransaction = findViewById( R.id.button_test_transaction )
         this._buttonAbortTransaction = findViewById( R.id.button_test_abort )
-        this._inputAmount = findViewById(R.id.input_amount )
-        this._inputCurrency = findViewById(R.id.input_currency)
+        this._buttonClearLog         = findViewById( R.id.button_clear_log )
+        this._inputAmount            = findViewById( R.id.input_amount )
+        this._inputCurrency          = findViewById( R.id.input_currency)
 
         //setup currency spinner
         this._inputCurrency?.adapter = ArrayAdapter<Currency>(this, android.R.layout.simple_list_item_1, Currency.values())
@@ -95,6 +97,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    fun clearLog() {
+        _textViewLog?.text = ""
     }
 
     /**
