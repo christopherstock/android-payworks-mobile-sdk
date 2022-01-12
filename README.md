@@ -47,3 +47,13 @@ Higher versions yield a Kotlin runtime error in transaction() issue. (`NoSuchMet
 - TODO 2nd library (mPOS PayButton SDK) with 2nd fragment and demo
 - TODO extract transaction-handling to Service
 - TODO Signature Required
+- TODO Map for assignment of specific amounts (read all 'AMOUNT_'-fields from DefaultMockConfiguration via reflection?)!
+- TODO TDD Feature Approach
+- TODO Button 'clear console'
+
+## Nice to Haves
+- TODO Colored line output in log console
+- TODO Different Layout for Landscape mode?
+- TODO IP/Port as input field?
+- TODO Move assignment of Button callback listeners from FirstFragment to MainActivity?
+- TODO Introduce Coding Style Linter (+GitHub/GitLab CI/CD)?
