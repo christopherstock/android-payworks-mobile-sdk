@@ -10,10 +10,15 @@
         android:id="@+id/textview_log_scroll_view"
         android:layout_width="fill_parent"
         android:layout_height="300dip"
-        android:scrollbars="vertical"
         android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:scrollbars = "vertical"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbarThumbVertical="@drawable/scrollbar"
+        android:scrollbarSize="@dimen/scrollbar_size"
+        android:fadeScrollbars="true"
+        >
 
         <TextView
             android:id="@+id/textview_log"
@@ -22,7 +27,6 @@
             android:text=""
             android:textColor="#000000"
             android:background="#d8d8d8"
-            android:scrollbars = "vertical"
             />
 
     </ScrollView>

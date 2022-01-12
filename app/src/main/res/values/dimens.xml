@@ -1,3 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="scrollbar_size">4.0dp</dimen>
+    <dimen name="scrollbar_corner_radius">4.0dp</dimen>
 </resources>
