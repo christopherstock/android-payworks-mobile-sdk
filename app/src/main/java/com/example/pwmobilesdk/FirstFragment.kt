@@ -32,6 +32,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonTestTransaction.setOnClickListener {
+
             ( activity as MainActivity ).startTransaction()
         }
 

@@ -18,9 +18,12 @@ import io.mpos.paymentdetails.DccInformation
 import io.mpos.paymentdetails.ApplicationInformation
 import io.mpos.android.shared.BitmapHelper
 import android.graphics.Bitmap
+import android.icu.util.CurrencyAmount
+import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import io.mpos.transactionprovider.TransactionProcessWithRegistrationListener
 import io.mpos.transactions.parameters.TransactionParameters
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     private var _textViewLog: TextView? = null
     private var _buttonStartTransaction: Button? = null
     private var _buttonAbortTransaction: Button? = null
+    private var _inputAmount: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         this._textViewLog            = findViewById( R.id.textview_log )
         this._buttonStartTransaction = findViewById( R.id.button_test_transaction )
         this._buttonAbortTransaction = findViewById( R.id.button_test_abort )
+        this._inputAmount = findViewById(R.id.input_amount )
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -94,7 +99,16 @@ class MainActivity : AppCompatActivity() {
         @see https://payworks.mpymnt.com/cp_int_pos_custom_overview/cp_int_pos_custom_integration.html
     */
     fun startTransaction() {
+        // get and check amount
+        val amount: String = _inputAmount?.text.toString()
 
+        val decimalAmount: BigDecimal
+        if (amount.isNotEmpty())  {
+            decimalAmount = amount.toBigDecimal()
+        } else {
+            _textViewLog?.append("No valid amount provided\n")
+            return
+        }
         // log new transaction start
         _textViewLog?.append("Starting new Transaction\n")
 
@@ -125,7 +139,7 @@ class MainActivity : AppCompatActivity() {
                                                                      .build();
     */
         val transactionParameters = TransactionParameters.Builder()
-            .charge(BigDecimal("5.00"), Currency.EUR)
+            .charge(decimalAmount, Currency.EUR)
             .subject("Bouquet of Flowers")
             .customIdentifier("yourReferenceForTheTransaction")
             .build()
