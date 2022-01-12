@@ -103,12 +103,12 @@ class MainActivity : AppCompatActivity() {
         val amount: String = _inputAmount?.text.toString()
 
         val decimalAmount: BigDecimal
-        if (amount.isNotEmpty())  {
-            decimalAmount = amount.toBigDecimal()
-        } else {
+        if (amount.isEmpty()) {
             _textViewLog?.append("No valid amount provided\n")
             return
         }
+        decimalAmount = amount.toBigDecimal()
+
         // log new transaction start
         _textViewLog?.append("Starting new Transaction\n")
 
