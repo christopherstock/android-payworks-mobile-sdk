@@ -59,8 +59,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_currency"
-        android:background="@drawable/ic_launcher_background"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:background="@drawable/button_default_bg"
+        android:textColor="@drawable/button_default_fg"
         />
 
     <Button
@@ -72,8 +72,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_test_transaction"
         android:visibility="gone"
-        android:background="@drawable/ic_launcher_background"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:background="@drawable/button_default_bg"
+        android:textColor="@drawable/button_default_fg"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
