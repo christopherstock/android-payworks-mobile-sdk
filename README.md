@@ -44,12 +44,12 @@ Higher versions yield a Kotlin runtime error in transaction() issue. (`NoSuchMet
 - TODO CAMILLE: Button 'clear console'
 - TODO SIMON: scroll log output on appending logs
 
+- TODO update gradle build tools to latest version?
 - TODO unify start and cancel transaction to one single button
 - TODO extract transaction-handling to Service
 - TODO Signature Required
 - TODO Map for assignment of specific amounts (read all 'AMOUNT_'-fields from DefaultMockConfiguration via reflection?)!
 - TODO TDD Feature Approach
-- TODO update gradle build tools to latest version
 - TODO move test project to GitLab
 
 - TODO implement 'Refunds'
