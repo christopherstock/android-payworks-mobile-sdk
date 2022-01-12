@@ -40,7 +40,11 @@ Higher versions yield a Kotlin runtime error in transaction() issue. (`NoSuchMet
 ```
 
 # Backlog
+- TODO add input fields for amount, (drop-down currency)
+
 - TODO unify styles for buttons / different colors
 - TODO scroll log output on appending logs
-- TODO add input fields for amount, drop-down currency
 - TODO unify start and cancel transaction to one single button
+- TODO 2nd library (mPOS PayButton SDK) with 2nd fragment and demo
+- TODO extract transaction-handling to Service
+- TODO Signature Required
