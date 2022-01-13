@@ -5,8 +5,8 @@
 
     <color name="black">#ff000000</color>
     <color name="white">#ffffffff</color>
-    <color name="grey_light">#ffc7c7c7</color>
-    <color name="grey_dark">#ff808080</color>
+    <color name="grey_light">#ff808080</color>
+    <color name="grey_dark">#424242</color>
 
     <color name="scrollbar">@color/mayflower_orange</color>
     <color name="button_default_bg_unselect">@color/mayflower_orange</color>
