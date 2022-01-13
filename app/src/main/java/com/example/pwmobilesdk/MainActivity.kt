@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
 
         val decimalAmount: BigDecimal
         if (amount.isEmpty()) {
-            _textViewLog?.append("No valid amount provided\n")
+            logToConsole("No valid amount provided")
             return
         }
         decimalAmount = amount.toBigDecimal()
@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
         val currency = _inputCurrency?.selectedItem as Currency
 
         // log new transaction start
-        _textViewLog?.append("Starting new Transaction\n")
+        logToConsole("Starting new Transaction")
 
         // disable button 'start transaction'
         _buttonStartTransaction?.visibility = View.GONE
@@ -191,9 +191,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
-                    _textViewLog?.append(lineToLog + "\n")
-
-                    scrollTextViewLog()
+                    logToConsole(lineToLog)
                 }
 
                 override fun onCustomerSignatureRequired(
@@ -243,7 +241,8 @@ class MainActivity : AppCompatActivity() {
 
                     _buttonStartTransaction?.visibility = View.VISIBLE
                     _buttonAbortTransaction?.visibility = View.GONE
-                    _textViewLog?.append("Transaction completed\n")
+
+                    logToConsole("Transaction completed")
 
                     if (processDetails.state == TransactionProcessDetailsState.APPROVED) {
                         // print the merchant receipt
@@ -264,12 +263,16 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         // Allow your merchant to try another transaction
                     }
-                    scrollTextViewLog()
                 }
             })
     }
 
-    fun scrollTextViewLog() {
+    fun logToConsole(lineToLog: String) {
+        _textViewLog?.append(lineToLog + "\n")
+        scrollTextViewLog()
+    }
+
+    private fun scrollTextViewLog() {
         _scrollViewTextLog?.let {
             if (it.canScrollVertically(View.FOCUS_DOWN)) {
                 it.fullScroll(View.FOCUS_DOWN)
