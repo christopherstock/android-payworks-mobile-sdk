@@ -40,9 +40,6 @@ Higher versions yield a Kotlin runtime error in transaction() issue. (`NoSuchMet
 ```
 
 # Backlog
-- TODO CHRISTOPHER: unify styles for buttons / different colors
-- TODO SIMON: scroll log output on appending logs
-- TODO Map for assignment of specific amounts (read all 'AMOUNT_'-fields from DefaultMockConfiguration via reflection?)!
 - TODO move test project to GitLab
 
 ## TDD Approach
