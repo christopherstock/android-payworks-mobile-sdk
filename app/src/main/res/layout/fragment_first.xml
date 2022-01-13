@@ -76,4 +76,16 @@
         android:textColor="@drawable/button_default_fg"
         />
 
+    <Button
+        android:id="@+id/button_clear_log"
+        android:layout_width="wrap_content"
+        android:layout_height="50dip"
+        android:text="@string/clear_log"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_test_abort"
+        android:background="@drawable/ic_launcher_background"
+        android:backgroundTint="@android:color/holo_red_dark"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,6 +39,10 @@ class FirstFragment : Fragment() {
         binding.buttonTestAbort.setOnClickListener {
             ( activity as MainActivity ).abortTransaction()
         }
+
+        binding.buttonClearLog.setOnClickListener {
+            ( activity as MainActivity ).clearLog()
+        }
     }
 
     override fun onDestroyView() {
