@@ -2,4 +2,9 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="scrollbar_size">4.0dp</dimen>
     <dimen name="scrollbar_corner_radius">4.0dp</dimen>
+    <dimen name="button_corner_radius">4.0dp</dimen>
+    <dimen name="button_stroke_size">1.0dp</dimen>
+    <dimen name="button_min_width">50.0dp</dimen>
+    <dimen name="button_padding">12.0dp</dimen>
+    <dimen name="button_margin">10.0dp</dimen>
 </resources>
