@@ -41,7 +41,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_log_scroll_view"
+        android:layout_marginTop="5dip"
         />
+
     <Spinner
         android:id="@+id/input_currency"
         android:layout_width="200dip"
@@ -49,6 +51,7 @@
         app:layout_constraintTop_toBottomOf="@id/input_amount"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dip"
         />
 
     <Button
@@ -59,8 +62,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_currency"
-        android:background="@drawable/ic_launcher_background"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:background="@drawable/button_default_bg"
+        android:textColor="@drawable/button_default_fg"
+        android:layout_marginTop="5dip"
         />
 
     <Button
@@ -72,8 +76,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_test_transaction"
         android:visibility="gone"
-        android:background="@drawable/ic_launcher_background"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:background="@drawable/button_default_bg"
+        android:textColor="@drawable/button_default_fg"
+        android:layout_marginTop="5dip"
         />
 
     <Button
@@ -84,8 +89,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_test_abort"
-        android:background="@drawable/ic_launcher_background"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:background="@drawable/button_default_bg"
+        android:textColor="@drawable/button_default_fg"
+        android:layout_marginTop="10dip"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
