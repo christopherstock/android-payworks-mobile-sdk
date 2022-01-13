@@ -41,26 +41,24 @@ Higher versions yield a Kotlin runtime error in transaction() issue. (`NoSuchMet
 
 # Backlog
 - TODO CHRISTOPHER: unify styles for buttons / different colors
-- TODO CAMILLE: Button 'clear console'
 - TODO SIMON: scroll log output on appending logs
-
-- TODO update gradle build tools to latest version?
-- TODO unify start and cancel transaction to one single button
-- TODO extract transaction-handling to Service
-- TODO Signature Required
 - TODO Map for assignment of specific amounts (read all 'AMOUNT_'-fields from DefaultMockConfiguration via reflection?)!
-- TODO TDD Feature Approach
 - TODO move test project to GitLab
 
-- TODO implement 'Refunds'
+## TDD Approach
+- TODO Move assignment of Button callback listeners from FirstFragment to MainActivity
+- TODO extract transaction-handling to Service
+
+## mPOS PayButton SDK
 - TODO 2nd library (mPOS PayButton SDK) with 2nd fragment and demo
   https://payworks.mpymnt.com/cp_int_pos_paybutton_overview/cp_int_pos_paybutton_integration.html
+  - TODO Signature Required
   - TODO Stripe Payments
   - TODO Signature Required
+- TODO implement 'Refunds'
 
 ## Nice to Haves
 - TODO Colored line output in log console
 - TODO Different Layout for Landscape mode?
 - TODO IP/Port as input field?
-- TODO Move assignment of Button callback listeners from FirstFragment to MainActivity?
 - TODO Introduce Coding Style Linter (+GitHub/GitLab CI/CD)?
