@@ -32,8 +32,10 @@ import io.mpos.transactions.Transaction
 import java.math.BigDecimal
 import java.util.*
 import io.mpos.Mpos
+import io.mpos.mock.DefaultMockConfiguration
+import kotlin.collections.HashMap
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -45,6 +47,9 @@ class MainActivity : AppCompatActivity() {
     private var _buttonClearLog: Button? = null
     private var _inputAmount: EditText? = null
     private var _inputCurrency: Spinner? = null
+    private var _inputTestAmount: Spinner? = null
+
+    private var _testAmounts = HashMap<String, BigDecimal>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,11 +68,17 @@ class MainActivity : AppCompatActivity() {
         this._buttonAbortTransaction = findViewById( R.id.button_test_abort )
         this._buttonClearLog         = findViewById( R.id.button_clear_log )
         this._inputAmount            = findViewById( R.id.input_amount )
-        this._inputCurrency          = findViewById( R.id.input_currency)
+        this._inputCurrency          = findViewById( R.id.input_currency )
+        this._inputTestAmount        = findViewById( R.id.input_test_amount )
 
         //setup currency spinner
         this._inputCurrency?.adapter = ArrayAdapter<Currency>(this, android.R.layout.simple_list_item_1, Currency.values())
         this._inputCurrency?.setSelection(Currency.EUR.ordinal)
+
+        //setup test amount spinner
+        setTestAmounts()
+        this._inputTestAmount?.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, _testAmounts.keys.toMutableList().sorted())
+        this._inputTestAmount?.onItemSelectedListener = this
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -101,6 +112,21 @@ class MainActivity : AppCompatActivity() {
 
     fun clearLog() {
         _textViewLog?.text = ""
+    }
+
+    fun setTestAmounts() {
+        val mockConf = DefaultMockConfiguration()
+        val fields = mockConf.javaClass.declaredFields
+        var amounts = HashMap<String, BigDecimal>()
+
+        for (field in fields) {
+            if (field.name.contains("AMOUNT_", ignoreCase = false)) {
+                val amount = field.get(mockConf) as BigDecimal
+                amounts[field.name.removePrefix("AMOUNT_")] = amount
+            }
+        }
+
+        _testAmounts = amounts
     }
 
     /**
@@ -279,5 +305,17 @@ class MainActivity : AppCompatActivity() {
         Log.i( "mpos", "cancelTransaction Button pressed!" )
 
         this._process?.requestAbort()
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+        val selected = parent?.getItemAtPosition(pos)
+        val amountString = _testAmounts[selected].toString()
+        if (amountString != null) {
+            _inputAmount?.setText(amountString)
+        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        _inputAmount?.setText("")
     }
 }
