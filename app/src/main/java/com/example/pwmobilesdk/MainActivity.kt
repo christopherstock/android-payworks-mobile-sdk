@@ -17,8 +17,6 @@ import io.mpos.paymentdetails.DccInformation
 import io.mpos.paymentdetails.ApplicationInformation
 import io.mpos.android.shared.BitmapHelper
 import android.graphics.Bitmap
-import android.icu.util.CurrencyAmount
-import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -39,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var _process: TransactionProcess? = null
 
+    private var _scrollViewTextLog: ScrollView? = null
     private var _textViewLog: TextView? = null
     private var _buttonStartTransaction: Button? = null
     private var _buttonAbortTransaction: Button? = null
@@ -58,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        this._scrollViewTextLog      = findViewById(R.id.textview_log_scroll_view)
         this._textViewLog            = findViewById( R.id.textview_log )
         this._buttonStartTransaction = findViewById( R.id.button_test_transaction )
         this._buttonAbortTransaction = findViewById( R.id.button_test_abort )
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
 
         val decimalAmount: BigDecimal
         if (amount.isEmpty()) {
-            _textViewLog?.append("No valid amount provided\n")
+            logToConsole("No valid amount provided")
             return
         }
         decimalAmount = amount.toBigDecimal()
@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
         val currency = _inputCurrency?.selectedItem as Currency
 
         // log new transaction start
-        _textViewLog?.append("Starting new Transaction\n")
+        logToConsole("Starting new Transaction")
 
         // disable button 'start transaction'
         _buttonStartTransaction?.visibility = View.GONE
@@ -191,7 +191,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
-                    _textViewLog?.append(lineToLog + "\n")
+                    logToConsole(lineToLog)
                 }
 
                 override fun onCustomerSignatureRequired(
@@ -241,7 +241,8 @@ class MainActivity : AppCompatActivity() {
 
                     _buttonStartTransaction?.visibility = View.VISIBLE
                     _buttonAbortTransaction?.visibility = View.GONE
-                    _textViewLog?.append("Transaction completed\n\n")
+
+                    logToConsole("Transaction completed")
 
                     if (processDetails.state == TransactionProcessDetailsState.APPROVED) {
                         // print the merchant receipt
@@ -264,6 +265,15 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             })
+    }
+
+    fun logToConsole(lineToLog: String) {
+        _textViewLog?.append(lineToLog + "\n")
+        scrollTextViewLogToBottom()
+    }
+
+    private fun scrollTextViewLogToBottom() {
+        _scrollViewTextLog?.fullScroll(View.FOCUS_DOWN);
     }
 
     override fun onBackPressed() {
