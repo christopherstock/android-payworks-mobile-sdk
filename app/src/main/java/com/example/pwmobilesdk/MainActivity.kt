@@ -17,8 +17,6 @@ import io.mpos.paymentdetails.DccInformation
 import io.mpos.paymentdetails.ApplicationInformation
 import io.mpos.android.shared.BitmapHelper
 import android.graphics.Bitmap
-import android.icu.util.CurrencyAmount
-import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -39,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var _process: TransactionProcess? = null
 
+    private var _scrollViewTextLog: ScrollView? = null
     private var _textViewLog: TextView? = null
     private var _buttonStartTransaction: Button? = null
     private var _buttonAbortTransaction: Button? = null
@@ -58,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        this._scrollViewTextLog      = findViewById(R.id.textview_log_scroll_view)
         this._textViewLog            = findViewById( R.id.textview_log )
         this._buttonStartTransaction = findViewById( R.id.button_test_transaction )
         this._buttonAbortTransaction = findViewById( R.id.button_test_abort )
@@ -192,6 +192,8 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     _textViewLog?.append(lineToLog + "\n")
+
+                    scrollTextViewLog()
                 }
 
                 override fun onCustomerSignatureRequired(
@@ -241,7 +243,7 @@ class MainActivity : AppCompatActivity() {
 
                     _buttonStartTransaction?.visibility = View.VISIBLE
                     _buttonAbortTransaction?.visibility = View.GONE
-                    _textViewLog?.append("Transaction completed\n\n")
+                    _textViewLog?.append("Transaction completed\n")
 
                     if (processDetails.state == TransactionProcessDetailsState.APPROVED) {
                         // print the merchant receipt
@@ -262,8 +264,17 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         // Allow your merchant to try another transaction
                     }
+                    scrollTextViewLog()
                 }
             })
+    }
+
+    fun scrollTextViewLog() {
+        _scrollViewTextLog?.let {
+            if (it.canScrollVertically(View.FOCUS_DOWN)) {
+                it.fullScroll(View.FOCUS_DOWN)
+            }
+        }
     }
 
     override fun onBackPressed() {
