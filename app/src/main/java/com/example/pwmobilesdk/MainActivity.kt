@@ -77,7 +77,13 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         //setup test amount spinner
         setTestAmounts()
-        this._inputTestAmount?.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, _testAmounts.keys.toMutableList().sorted())
+
+        val sortedAmountKeys = _testAmounts.keys.toMutableList().sorted()
+        this._inputTestAmount?.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sortedAmountKeys)
+
+        val defaultIndex = sortedAmountKeys.indexOf("DEFAULT")
+        this._inputTestAmount?.setSelection(defaultIndex)
+
         this._inputTestAmount?.onItemSelectedListener = this
     }
 
