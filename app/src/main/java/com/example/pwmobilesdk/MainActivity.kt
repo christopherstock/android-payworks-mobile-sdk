@@ -269,15 +269,11 @@ class MainActivity : AppCompatActivity() {
 
     fun logToConsole(lineToLog: String) {
         _textViewLog?.append(lineToLog + "\n")
-        scrollTextViewLog()
+        scrollTextViewLogToBottom()
     }
 
-    private fun scrollTextViewLog() {
-        _scrollViewTextLog?.let {
-            if (it.canScrollVertically(View.FOCUS_DOWN)) {
-                it.fullScroll(View.FOCUS_DOWN)
-            }
-        }
+    private fun scrollTextViewLogToBottom() {
+        _scrollViewTextLog?.fullScroll(View.FOCUS_DOWN);
     }
 
     override fun onBackPressed() {
